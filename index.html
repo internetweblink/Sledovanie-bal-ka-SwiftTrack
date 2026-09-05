@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>SwiftTrack</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =====================================
+         HLAVIČKA
+    ====================================== -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-box">
+                📦
+            </div>
+
+            <div class="brand-name">
+                SwiftTrack
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================
+         HLAVNÁ ČASŤ
+    ====================================== -->
+
+    <main class="main-container">
+
+        <!-- STRÁNKA SLEDOVANIA -->
+
+        <section
+            class="tracking-section"
+            id="trackingSection"
+        >
+
+            <div class="tracking-card">
+
+                <h1>
+                    Sledovať zásielku
+                </h1>
+
+                <p class="tracking-description">
+                    Zadajte číslo zásielky a zobrazte najnovšie
+                    informácie o doručení.
+                </p>
+
+
+                <div class="tracking-form">
+
+                    <input
+                        type="text"
+                        id="trackingInput"
+                        placeholder="Zadajte číslo zásielky"
+                        autocomplete="off"
+                    >
+
+                    <button
+                        type="button"
+                        onclick="trackPackage()"
+                    >
+                        Sledovať zásielku
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             PODROBNOSTI O ZÁSIELKE
+        ====================================== -->
+
+        <section
+            class="package-section"
+            id="packageSection"
+        >
+
+            <div class="details-header">
+
+                <div>
+
+                    <span class="small-label">
+                        ČÍSLO ZÁSIELKY
+                    </span>
+
+                    <h2 id="trackingNumber">
+                        ST-2026-4296
+                    </h2>
+
+                </div>
+
+                <div
+                    class="status-badge"
+                    id="status"
+                >
+                    Na ceste
+                </div>
+
+            </div>
+
+
+            <!-- INFORMÁCIE O ZÁSIELKE -->
+
+            <div class="info-grid">
+
+                <div class="info-card">
+
+                    <span class="info-label">
+                        ZÁSIELKA
+                    </span>
+
+                    <strong id="packageName"></strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span class="info-label">
+                        HMOTNOSŤ ZÁSIELKY
+                    </span>
+
+                    <strong id="weight"></strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span class="info-label">
+                        POPLATOK ZA DORUČENIE
+                    </span>
+
+                    <strong id="deliveryFee"></strong>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <span class="info-label">
+                        ODHADOVANÉ DORUČENIE
+                    </span>
+
+                    <strong id="estimatedDelivery"></strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- ÚDAJE ZÁKAZNÍKA -->
+
+            <div class="customer-section">
+
+                <div class="section-heading">
+                    <span>👤</span>
+                    <h3>Údaje zákazníka</h3>
+                </div>
+
+
+                <div class="customer-card">
+
+                    <div class="customer-photo-container">
+
+                        <img
+                            id="customerPhoto"
+                            src="Frantisekp.jpeg"
+                            alt="Zákazník"
+                        >
+
+                    </div>
+
+
+                    <div class="customer-details">
+
+                        <div class="customer-field">
+
+                            <span>
+                                CELÉ MENO
+                            </span>
+
+                            <strong id="customerName"></strong>
+
+                        </div>
+
+
+                        <div class="customer-field">
+
+                            <span>
+                                ADRESA
+                            </span>
+
+                            <strong id="customerAddress"></strong>
+
+                        </div>
+
+
+                        <div class="customer-field">
+
+                            <span>
+                                TELEFÓNNE ČÍSLO
+                            </span>
+
+                            <a
+                                id="customerPhone"
+                                href="#"
+                            ></a>
+
+                        </div>
+
+
+                        <div class="customer-field">
+
+                            <span>
+                                ZÁSIELKA Z DUBAJU NA SLOVENSKO
+                            </span>
+
+                            <strong id="deliveryDestination"></strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- POLOHA -->
+
+            <div class="location-card">
+
+                <div class="location-icon">
+                    📍
+                </div>
+
+
+                <div class="location-content">
+
+                    <span class="location-label">
+                        AKTUÁLNA POLOHA
+                    </span>
+
+                    <h3 id="currentLocation">
+                        Dubaj
+                    </h3>
+
+                    <p id="latestUpdate"></p>
+
+
+                    <div class="location-divider"></div>
+
+
+                    <span class="location-label heading-label">
+                        SMER SLOVENSKO
+                    </span>
+
+                    <h3 id="headingTo"></h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- =====================================
+                 FOTOGALÉRIA ZÁSIELKY
+            ====================================== -->
+
+            <div class="package-gallery">
+
+                <div class="gallery-title">
+
+                    <span>📷</span>
+
+                    <h3>
+                        Fotografie zásielky
+                    </h3>
+
+                </div>
+
+
+                <div
+                    class="photo-slider"
+                    id="packageSlider"
+                >
+
+                    <div
+                        class="photo-slider-track"
+                        id="sliderTrack"
+                    >
+
+                        <div class="photo-slide">
+
+                            <img
+                                src="Frantisekcar.jpeg"
+                                alt="Fotografia zásielky 1"
+                            >
+
+                        </div>
+
+
+                        <div class="photo-slide">
+
+                            <img
+                                src="Frantisekpackage.jpeg"
+                                alt="Fotografia zásielky 2"
+                            >
+
+                        </div>
+
+
+                        <div class="photo-slide">
+
+                            <img
+                                src="Frantisekcard.jpeg"
+                                alt="Fotografia zásielky 3"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="photo-arrow photo-arrow-left"
+                        onclick="previousSlide()"
+                    >
+                        ‹
+                    </button>
+
+
+                    <button
+                        class="photo-arrow photo-arrow-right"
+                        onclick="nextSlide()"
+                    >
+                        ›
+                    </button>
+
+                </div>
+
+
+                <div class="photo-dots">
+
+                    <button
+                        class="photo-dot active"
+                        onclick="goToSlide(0)"
+                    ></button>
+
+                    <button
+                        class="photo-dot"
+                        onclick="goToSlide(1)"
+                    ></button>
+
+                    <button
+                        class="photo-dot"
+                        onclick="goToSlide(2)"
+                    ></button>
+
+                </div>
+
+            </div>
+
+
+            <!-- PRIEBEH DORUČENIA -->
+
+            <div class="progress-section">
+
+                <div class="section-heading">
+
+                    <span>🚚</span>
+
+                    <h3>
+                        Priebeh doručenia
+                    </h3>
+
+                </div>
+
+
+                <div class="progress-container">
+
+                    <div class="progress-bar">
+
+                        <div
+                            class="progress-fill"
+                            id="progressFill"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="progress-info">
+
+                        <span>
+                            Priebeh zásielky
+                        </span>
+
+                        <strong id="progressText">
+                            0%
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DORUČOVATEĽ -->
+
+            <div class="agent-card">
+
+                <div class="agent-icon">
+                    👨‍💼
+                </div>
+
+
+                <div class="agent-info">
+
+                    <span>
+                        DORUČOVATEĽ
+                    </span>
+
+                    <strong>
+                        Doručovateľ SwiftTrack
+                    </strong>
+
+                    <p>
+                        Kontaktujte doručovateľa v prípade potreby pomoci
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="contact-button"
+                    onclick="openContactModal()"
+                >
+                    Kontakt
+                </button>
+
+            </div>
+
+
+            <button
+                class="back-button"
+                onclick="goBack()"
+            >
+                ← Sledovať inú zásielku
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================
+         KONTAKTNÉ OKNO
+    ====================================== -->
+
+    <div
+        class="modal"
+        id="contactModal"
+        onclick="closeContactModal(event)"
+    >
+
+        <div
+            class="modal-content"
+            onclick="event.stopPropagation()"
+        >
+
+            <button
+                class="modal-close"
+                onclick="closeContactModal()"
+            >
+                ×
+            </button>
+
+
+            <h2>
+                Kontaktovať doručovateľa
+            </h2>
+
+            <p>
+                Vyberte preferovaný spôsob kontaktu.
+            </p>
+
+
+            <!-- ZANGI -->
+
+            <a
+                href="https://services.zangi.com/dl/conversation/3549336473"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-option"
+            >
+
+                <span class="contact-icon zangi-icon">
+
+                    <!-- SYMBOL PODOBNÝ ZANGI -->
+
+                    <svg
+                        viewBox="0 0 100 100"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+
+                        <circle
+                            cx="50"
+                            cy="50"
+                            r="48"
+                            fill="#ffffff"
+                        />
+
+                        <path
+                            d="M27 30
+                               C27 24 32 20 38 20
+                               H62
+                               C68 20 73 24 73 30
+                               V55
+                               C73 61 68 66 62 66
+                               H48
+                               L35 79
+                               V66
+                               H38
+                               C32 66 27 61 27 55
+                               Z"
+                            fill="none"
+                            stroke="#222222"
+                            stroke-width="6"
+                            stroke-linejoin="round"
+                        />
+
+                        <path
+                            d="M39 42
+                               L61 31
+                               L55 53
+                               L48 45
+                               Z"
+                            fill="#222222"
+                        />
+
+                    </svg>
+
+                </span>
+
+
+                <span>
+                    Zangi
+                </span>
+
+            </a>
+
+
+            <!-- TELEGRAM -->
+
+            <a
+                href="YOUR_TELEGRAM_LINK_HERE"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-option"
+            >
+
+                <span class="contact-icon telegram-icon">
+
+                    <!-- TELEGRAMOVÉ LIETADLO -->
+
+                    <svg
+                        viewBox="0 0 100 100"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+
+                        <circle
+                            cx="50"
+                            cy="50"
+                            r="48"
+                            fill="#229ED9"
+                        />
+
+                        <path
+                            d="M23 49
+                               L72 28
+                               C75 27 78 30 77 33
+                               L67 72
+                               C66 76 62 78 59 75
+                               L46 63
+                               L38 71
+                               C36 73 33 72 33 69
+                               L34 58
+                               L23 53
+                               C20 52 20 50 23 49
+                               Z"
+                            fill="#ffffff"
+                        />
+
+                        <path
+                            d="M34 58
+                               L61 38
+                               L46 63"
+                            fill="none"
+                            stroke="#229ED9"
+                            stroke-width="4"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        />
+
+                    </svg>
+
+                </span>
+
+
+                <span>
+                    Telegram
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- PÄTIČKA -->
+
+    <footer>
+        © 2026 SwiftTrack
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
