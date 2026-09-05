@@ -12,7 +12,7 @@ const packageData = {
 
     deliveryFee: "1 050,00 €",
 
-    estimatedDelivery: "5. september 2026",
+    estimatedDelivery: "8. september 2026",
 
     currentLocation: "Dubaj",
 
